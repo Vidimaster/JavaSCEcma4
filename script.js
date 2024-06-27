@@ -23,6 +23,7 @@ class Book {
 }
 const book = new Book("BookName1", "Author1", 123);
 book.displayInfo();
+
 // Задание 2: "Управление списком студентов"
 // Реализуйте класс Student, представляющий студента, со следующими свойствами и методами:
 
@@ -45,6 +46,5 @@ class Student {
         console.log(`${this.constructor.name} name: ${this.name}, age: ${this.age}, grade: ${this.grade} `);
     }
 }
-
 const student = new Student("John Smith", 16, "10th grade");
 student.displayInfo(); 
