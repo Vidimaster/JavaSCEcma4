@@ -1,50 +1,99 @@
-// Задание 1: "Управление библиотекой книг"
+// Домашнее задание:
+// Задание 1: "Управление персоналом компании"
 
-// Реализуйте класс Book, представляющий книгу, со следующими свойствами и методами:
+// Реализуйте класс Employee (сотрудник), который имеет следующие свойства и методы:
+// Свойство name (имя) - строка, имя сотрудника.
+// Метод displayInfo() - выводит информацию о сотруднике (имя) в консоль.
 
-// Свойство title (название) - строка, название книги.
-// Свойство author (автор) - строка, имя автора книги.
-// Свойство pages (количество страниц) - число, количество страниц в книге.
-// Метод displayInfo() - выводит информацию о книге (название, автор и количество страниц).
+// Реализуйте класс Manager (менеджер), который наследует класс Employee и имеет дополнительное свойство и метод:
+// Свойство department (отдел) - строка, отдел, в котором работает менеджер.
+// Метод displayInfo() - переопределяет метод displayInfo() родительского класса и выводит информацию о менеджере (имя и отдел).
 
-// // Пример использования класса
-// const book = new Book("BookName1", "Author1", 123);
-// book.displayInfo(); // "Title: BookName1, Author: Author1, Pages: 123"
+// // Пример использования классов
+// const employee = new Employee("John Smith");
+// employee.displayInfo(); // "Name: John Smith"
 
-class Book {
-    constructor(title, author, pages) {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-    }
-    displayInfo() {
-        console.log(`${this.constructor.name} title: ${this.title}, author: ${this.author}, pages: ${this.pages} `);
-    }
-}
-const book = new Book("BookName1", "Author1", 123);
-book.displayInfo();
+// const manager = new Manager("Jane Doe", "Sales");
+// manager.displayInfo(); // "Name: John Doe, Department: Sales"
 
-// Задание 2: "Управление списком студентов"
-// Реализуйте класс Student, представляющий студента, со следующими свойствами и методами:
-
-// Свойство name (имя) - строка, имя студента.
-// Свойство age (возраст) - число, возраст студента.
-// Свойство grade (класс) - строка, класс, в котором учится студент.
-// Метод displayInfo() - выводит информацию о студенте в консоль.
-
-// // Пример использования класса
-// const student = new Student("John Smith", 16, "10th grade");
-// student.displayInfo(); // "Name: John Smith, Age: 16, Grade: 10th grade"
-
-class Student {
-    constructor(name, age, grade) {
+class Employee {
+    constructor(name) {
         this.name = name;
-        this.age = age;
-        this.grade = grade;
     }
     displayInfo() {
-        console.log(`${this.constructor.name} name: ${this.name}, age: ${this.age}, grade: ${this.grade} `);
+        console.log(`${this.constructor.name} name: ${this.name}`);
     }
 }
-const student = new Student("John Smith", 16, "10th grade");
-student.displayInfo(); 
+
+const employee = new Employee("John Smith");
+
+class Manager extends Employee {
+    constructor(name, department) {
+        super(name);
+        this.department = department;
+    }
+    displayInfo() {
+        console.log(`${this.constructor.name} name: ${this.name}, department: ${this.department}`);
+    }
+}
+
+const manager = new Manager("Jane Doe", "Sales");
+
+manager.displayInfo();
+employee.displayInfo();
+
+// Задание 2: "Управление списком заказов"
+
+// Реализуйте класс Product (товар), который имеет следующие свойства и методы:
+// Свойство name - название товара.
+// Свойство price - цена товара.
+// Свойство quantity - количество товара.
+
+// Реализуйте класс Order (заказ), который имеет следующие свойства и методы:
+// Свойство id (номер заказа) - число, уникальный номер заказа.
+// Свойство products (продукты) - массив, содержащий список продуктов в заказе.
+// Метод addProduct(product) - принимает объект класса Product и добавляет его в список продуктов заказа.
+// Метод getTotalPrice() - возвращает общую стоимость заказа, основанную на ценах продуктов.
+
+// // Пример использования:
+// const order = new Order(12345);
+
+// const product1 = new Product("Phone", 500, 2);
+// order.addProduct(product1);
+
+// const product2 = new Product("Headphones", 100, 1);
+// order.addProduct(product2);
+
+// console.log(order.getTotalPrice()); // Вывод: 1100
+
+class Product {
+    constructor(name, price, quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+
+class Order {
+    products = new Array();
+    constructor(id) {
+        this.id = id;
+    }
+    addProduct(obj) {
+        this.products.push(obj);
+    }
+    getTotalPrice() {
+        let res = 0;
+        this.products.forEach(element => {
+            res = res + element.price * element.quantity;
+        });
+        return res;
+    }
+}
+
+const order = new Order(12345);
+const product1 = new Product("Phone", 500, 2);
+order.addProduct(product1);
+const product2 = new Product("Headphones", 100, 1);
+order.addProduct(product2);
+console.log(order.getTotalPrice()); 
